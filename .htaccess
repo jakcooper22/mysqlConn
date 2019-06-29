@@ -1,0 +1,3 @@
+<files connects.js>
+    deny from all
+</files>
