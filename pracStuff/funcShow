@@ -1,0 +1,19 @@
+function leftFunction(arg, arg2) { 
+
+    var variableLeftFunction = arg;
+    function myValue() { 
+       console.log(variableLeftFunction);
+    }
+
+    variableRightFunction = arg2;
+    function myValue2() {
+        console.log(variableRightFunction);
+    }
+    myValue(); 
+} 
+var left = "left";
+var right = "right";
+
+leftFunction(left, right);
+leftFunction(right);
+leftFunction(left);
