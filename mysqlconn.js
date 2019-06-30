@@ -22,7 +22,7 @@ con.connect(function(err) {
   console.log("Connected!");
   con.query("select * from users", function (err, result, fields) {
   if (err) throw err;
-    console.log(result);    
+    console.log(result);
   });
 });
 
@@ -32,31 +32,52 @@ var temp1 = function() {return "empty" };
 
 http.createServer(function (req,res){
 
-    res.setHeader("Access-Control-Allow-Origin", "*"); 
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
     res.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
     res.setHeader("X-Powered-By",' 3.2.1');
-    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Content-Type", "application/html");
 
     var reqUrl = req.url
     console.log(reqUrl);
 
     var mainPath = reqUrl.split('?')[0]
     console.log(mainPath);
+
     //var reqData = reqUrl.split('?')[1].split('=')
     //console.log(reqData);
-    
-    if (req.url = "/index"){
-        fs.readFile("index.html", function(err, data){
-            res.writeHead(200, {'content-Type': 'text/plain; charset=utf-8'});
+
+    //var fileConts;
+    //if (mainPath = "index"){
+    //    fs.readFile("index.html", function(err,data){
+    //        fileConts = data;
+    //        console.log(fileConts);
+    //    });
+
+    //}else if (mainPath = "/index2"){
+    //    fs.readFile("index2.html", function(err,data2){
+    //        fileConts = data2;
+    //        console.log(fileConts);
+    //    });
+    //};
+
+    if (mainPath == "/"){
+        fs.readFile("index.html", function(err, fileConts){
+          res.writeHead(200, {'content-Type': 'text/html; charset=utf-8'});
+          res.write(fileConts);
+          res.end();
+          return;
+        });
+    }else if (mainPath == "/index2"){
+        fs.readFile("index2.html", function(err,data){
+            res.writeHead(200, {'content-Type': 'text/html; charset=utf-8'});
             res.write(data);
             res.end();
-        })
-    }else{
-         res.writeHead(200, {'Content-Type': 'text/html'});
-            res.write('<b>Hey there!</b><br /><br />This is the default response. Requested URL is: ' + req.url);
-               res.end();
-    }
+            return;
+        });
+    //
+    //
+    };
 
 }).listen(9000);
 
